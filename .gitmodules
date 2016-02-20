@@ -1,0 +1,16 @@
+[submodule "lib/GladNet2"]
+	path = lib/GladNet2
+	url = https://github.com/GladLive/GladNet2.0.git
+[submodule "lib/GladNet.PhotonServer"]
+	path = lib/GladNet.PhotonServer
+	url = https://github.com/GladLive/GladNet.PhotonServer.git
+[submodule "lib/GladNet.Serializer.Protobuf"]
+	path = lib/GladNet.Serializer.Protobuf
+	url = https://github.com/GladLive/GladNet.Serializer.Protobuf.git
+[submodule "lib/GladLive.Common"]
+	path = lib/GladLive.Common
+	url = https://github.com/GladLive/GladLive.Common.git
+[submodule "lib/LoggingServices"]
+	path = lib/LoggingServices
+	url = https://github.com/HelloKitty/.NetLoggingServices.git
+	branch = Net-3.5
