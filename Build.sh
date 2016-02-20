@@ -1,0 +1,1 @@
+xbuild ./GladLive.Server.Common.sln /p:DebugSymbols=False
