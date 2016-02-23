@@ -14,11 +14,11 @@ GladLive.AuthenticationService: TBA
 
 To use this project you'll first need a couple of things:
   - Visual Studio 2015
-  - Git for Windows
-  - Properly setup MSBuild 14 paths
-  
-Once you clone this reposistory you'll need to do the following before opening the .sln file:
-  - Run lib/BuildDepedencies.bat it will init submodules and compile dependencies.
+  - Add Nuget Feed https://www.myget.org/F/hellokitty/api/v2 in VS (Options -> NuGet -> Package Sources)
+
+## Builds
+
+Available on a Nuget Feed: https://www.myget.org/F/hellokitty/api/v2 [![hellokitty MyGet Build Status](https://www.myget.org/BuildSource/Badge/hellokitty?identifier=49afe5c8-2b28-4524-9a14-4f3d8be56cab)](https://www.myget.org/gallery/hellokitty)
 
 ##Tests
 
