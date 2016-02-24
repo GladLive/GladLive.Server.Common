@@ -11,21 +11,14 @@ namespace GladLive.Server.Common
 	public class AuthenticationMessage
 	{
 		/// <summary>
-		/// The plaintext string of the authorization message.
+		/// The byte[] value of the signed message
 		/// </summary>
 		[GladNetMember(1)]
-		public string AuthMessage { get; }
-
-		/// <summary>
-		/// The byte[] value of the signed <see cref="AuthMessage"/>.
-		/// </summary>
-		[GladNetMember(2)]
 		public byte[] SignedMessage { get; }
 
-		public AuthenticationMessage(string authMessage, byte[] signed)
+		public AuthenticationMessage(byte[] signedMessage)
 		{
-			AuthMessage = authMessage;
-			SignedMessage = signed;
+			SignedMessage = signedMessage;
 		}
 
 		/// <summary>

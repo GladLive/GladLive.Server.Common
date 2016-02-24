@@ -10,10 +10,11 @@ using Common.Logging;
 namespace GladLive.Server.Common
 {
 	/// <summary>
-	/// Chain of responsibility payload handling semantics with elevation required for handling.
+	/// Decorator for adding elevation requirements for payload handling.
+	/// It will add elevation requirement semantics to <see cref="IPayloadHandler{TSessionType}"/>
 	/// </summary>
 	/// <typeparam name="TSessionType">Elevatable session type.</typeparam>
-	public class ElevatedSessionPayloadHandler<TSessionType> : ChainPayloadHandler<TSessionType>, IClassLogger
+	public class ElevatedSessionPayloadHandlerDecorator<TSessionType> : IPayloadHandler<TSessionType>
 		where TSessionType : IElevatableSession, INetPeer
 	{
 		public ILog Logger { get; }
@@ -25,20 +26,25 @@ namespace GladLive.Server.Common
 		/// <summary>
 		/// Service that can verify if sessions are truly authenticated.
 		/// </summary>
-		private IElevationVerificationService verificationService;
+		private IElevationVerificationService verificationService { get; }
 
-		public ElevatedSessionPayloadHandler(ILog logger, IElevationVerificationService verifyService)
+		private IPayloadHandler<TSessionType> decoratedHandler { get; }
+
+		public ElevatedSessionPayloadHandlerDecorator(ILog logger, IElevationVerificationService verifyService, IPayloadHandler<TSessionType> handlerToDecorate)
 		{
 			Logger = logger;
 			verificationService = verifyService;
+			decoratedHandler = handlerToDecorate;
 		}
 
-		public override bool TryProcessPayload(PacketPayload payload, IMessageParameters parameters, TSessionType peer)
+		public bool TryProcessPayload(PacketPayload payload, IMessageParameters parameters, TSessionType peer)
 		{
+			//Decorates the internal handler with auth/elevation semantics
+
 			//Very important to check elevation status
 			if(verificationService.isElevated(peer.Token, peer))
 			{
-				return base.TryProcessPayload(payload, parameters, peer);
+				return decoratedHandler.TryProcessPayload(payload, parameters, peer);
 			}
 			else
 			{
