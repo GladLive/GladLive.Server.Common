@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GladLive.Server.Common", "src\GladLive.Server.Common\GladLive.Server.Common.csproj", "{714CD0A4-1725-4EA8-84CF-A19E785237AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0A12467D-0AAE-4DA3-A08E-9952B2132AD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{55BF8F1A-6E04-4B3C-9AB6-D1956AEECCB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GladLive.Server.Common.Tests", "tests\GladLive.Server.Common.Tests\GladLive.Server.Common.Tests.csproj", "{4E489B9A-E51D-4D18-BE30-D339221F2C9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,16 @@ Global
 		{714CD0A4-1725-4EA8-84CF-A19E785237AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{714CD0A4-1725-4EA8-84CF-A19E785237AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{714CD0A4-1725-4EA8-84CF-A19E785237AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E489B9A-E51D-4D18-BE30-D339221F2C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E489B9A-E51D-4D18-BE30-D339221F2C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E489B9A-E51D-4D18-BE30-D339221F2C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E489B9A-E51D-4D18-BE30-D339221F2C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{714CD0A4-1725-4EA8-84CF-A19E785237AB} = {0A12467D-0AAE-4DA3-A08E-9952B2132AD6}
+		{4E489B9A-E51D-4D18-BE30-D339221F2C9A} = {55BF8F1A-6E04-4B3C-9AB6-D1956AEECCB4}
 	EndGlobalSection
 EndGlobal
