@@ -28,6 +28,9 @@ namespace GladLive.Server.Common
 		/// </summary>
 		private IElevationVerificationService verificationService { get; }
 
+		/// <summary>
+		/// Internal payload handler to decorate with elevation required semantics
+		/// </summary>
 		private IPayloadHandler<TSessionType> decoratedHandler { get; }
 
 		public ElevatedSessionPayloadHandlerDecorator(ILog logger, IElevationVerificationService verifyService, IPayloadHandler<TSessionType> handlerToDecorate)

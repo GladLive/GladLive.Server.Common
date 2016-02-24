@@ -13,10 +13,16 @@ namespace GladLive.Server.Common
 	/// </summary>
 	[GladNetSerializationContract]
 	[GladNetSerializationInclude((int)PayloadNumber.AuthTokenRequest, typeof(PacketPayload), false)]
-	public class AuthTokenRequest
+	public class AuthTokenRequest : PacketPayload, IStaticPayloadParameters
 	{
 		//We don't need to send any data here
 		//The type of this message is enough to indicate what the request is for
+
+		public byte Channel { get { return 0; } }
+
+		public DeliveryMethod DeliveryMethod { get { return DeliveryMethod.ReliableOrdered; } }
+
+		public bool Encrypted { get { return true; } }
 
 		/// <summary>
 		/// Creates an auth token request encoded by the type.

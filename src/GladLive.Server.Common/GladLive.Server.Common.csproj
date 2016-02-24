@@ -68,6 +68,7 @@
     <Compile Include="Payload\Handlers\AuthenticationRequestHandler.cs" />
     <Compile Include="Payload\PayloadNumber.cs" />
     <Compile Include="Payload\Payloads\AuthenticationRequest.cs" />
+    <Compile Include="Payload\Payloads\AuthTokenResponse.cs" />
     <Compile Include="Payload\Payloads\AuthTokenRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ISigningService.cs" />
