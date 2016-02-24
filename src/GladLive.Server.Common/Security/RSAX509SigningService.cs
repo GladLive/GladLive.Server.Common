@@ -28,28 +28,28 @@ namespace GladLive.Server.Common
 			{
 				provider.FromXmlString(cert.PrivateKey.ToXmlString(false));
 
-				return provider.VerifyData(message, CryptoConfig.MapNameToOID("RSA"), signedMessage);
-			}				
+				return provider.VerifyData(message, CryptoConfig.MapNameToOID("SHA256"), signedMessage);
+			}
 		}
 
 		public bool isSigned(string message, byte[] signedMessage)
 		{
-			throw new NotImplementedException();
+			return isSigned(Encoding.ASCII.GetBytes(message), signedMessage);
 		}
 
 		public byte[] SignMessage(byte[] message)
-		{
-			throw new NotImplementedException();
-		}
-
-		public byte[] SignMessage(string message)
 		{
 			using (RSACryptoServiceProvider provider = new RSACryptoServiceProvider())
 			{
 				provider.FromXmlString(cert.PrivateKey.ToXmlString(true));
 
-				return provider.SignData(Encoding.ASCII.GetBytes(message), CryptoConfig.MapNameToOID("SHA256"));
+				return provider.SignData(message, CryptoConfig.MapNameToOID("SHA256"));
 			}
+		}
+
+		public byte[] SignMessage(string message)
+		{
+			return SignMessage(Encoding.ASCII.GetBytes(message));
 		}
 	}
 }
