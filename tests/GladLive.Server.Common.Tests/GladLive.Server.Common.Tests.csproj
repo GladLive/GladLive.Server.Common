@@ -76,7 +76,8 @@
     <Compile Include="Payload\Payloads\PayloadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\ElevatedSessionPayloadHandlerDecoratorTest.cs" />
-    <Compile Include="UnitTests\Security\RSAX509SigningServiceTests.cs" />
+    <Compile Include="Session\ElevationManagerTests.cs" />
+    <Compile Include="Security\RSAX509SigningServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GladLive.Server.Common
+namespace GladLive.Server.Common.Tests
 {
 	public class ElevatablePeer : INetPeer, IElevatableSession
 	{

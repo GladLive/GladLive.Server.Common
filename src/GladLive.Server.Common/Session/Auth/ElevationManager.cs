@@ -59,6 +59,13 @@ namespace GladLive.Server.Common
 				//If the session has a token we granted
 				if (authTokenMap.ContainsKey(session.UniqueAuthToken))
 				{
+					//We need to check if the token was stolen
+					if (authTokenMap[session.UniqueAuthToken].Session != session)
+					{
+						Logger.WarnFormat("Session {0} tried to check elevation with Token {1} when it doesn't belong to the session.", session.ToString(), session.UniqueAuthToken);
+						return false;
+					}
+
 					//If we're managing the session check if it's authenticated
 					//This will mean it's also elvated
 					return authTokenMap[session.UniqueAuthToken].isAuthenticated;
@@ -149,11 +156,11 @@ namespace GladLive.Server.Common
 			{
 				//We have to find the session key
 				//Don't trust the session instance to have a valid key
-				Guid? key = authTokenMap.Where(x => x.Value == session)
+				Guid? key = authTokenMap.Where(x => x.Value.Session == session)
 					.Select(x => (Nullable<Guid>)x.Key)
 					.FirstOrDefault();
 
-				if (key.HasValue)
+				if (!key.HasValue)
 					return false;
 				else
 					return authTokenMap.Remove(key.Value);

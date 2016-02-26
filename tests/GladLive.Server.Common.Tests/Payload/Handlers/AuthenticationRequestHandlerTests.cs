@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GladLive.Server.Common
+namespace GladLive.Server.Common.Tests
 {
 	[TestFixture]
 	public static class AuthenticationRequestHandlerTests

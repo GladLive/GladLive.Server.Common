@@ -25,6 +25,7 @@ namespace GladLive.Server.Common
 
 		public DeliveryMethod DeliveryMethod { get { return DeliveryMethod.ReliableOrdered; } }
 
+
 		public bool Encrypted { get { return true; } }
 
 		public AuthTokenResponse(Guid authToken)
