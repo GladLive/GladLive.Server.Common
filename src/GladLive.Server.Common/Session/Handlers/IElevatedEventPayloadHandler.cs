@@ -11,7 +11,7 @@ namespace GladLive.Common.Payload
 	/// </summary>
 	/// <typeparam name="TPeerType">Type of the peer.</typeparam>
 	/// <typeparam name="TPayloadType">Type of the payload</typeparam>
-	public interface IElevatedEventPayloadHandler<in TPeerType, TPayloadType> : IElevatedEventPayloadHandler<TPeerType>, IPayloadHandler<TPeerType, TPayloadType>
+	public interface IElevatedEventPayloadHandler<in TPeerType, TPayloadType> : IElevatedEventPayloadHandler<TPeerType>, IEventPayloadHandler<TPeerType, TPayloadType>
 		where TPeerType : INetPeer where TPayloadType : PacketPayload
 	{
 
@@ -22,7 +22,7 @@ namespace GladLive.Common.Payload
 	/// </summary>
 	/// <typeparam name="TPeerType">Type of the peer.</typeparam>
 	/// <typeparam name="TPayloadType">Type of the payload</typeparam>
-	public interface IElevatedEventPayloadHandler<in TPeerType> : IPayloadHandler<TPeerType>
+	public interface IElevatedEventPayloadHandler<in TPeerType> : IEventPayloadHandler<TPeerType>
 		where TPeerType : INetPeer
 	{
 
