@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GladLive.Server.Common
 {
+	/// <summary>
+	/// Manager that implements the various elevation and authentication services involving <see cref="IElevatableSession"/>s.
+	/// </summary>
 	public class ElevationManager : IElevationAuthenticationService, IElevationVerificationService,
 		IClassLogger
 	{
@@ -35,8 +38,14 @@ namespace GladLive.Server.Common
 		/// </summary>
 		private ReaderWriterLockSlim lockObj { get; }
 
+		/// <summary>
+		/// Signing services used to authenticate sessions.
+		/// </summary>
 		private ISigningService signingService;
 
+		/// <summary>
+		/// Map of currently managed session with the auth token guid as the key.
+		/// </summary>
 		private IDictionary<Guid, ManagedSession> authTokenMap { get; }
 
 		public ElevationManager(ILog logger, ISigningService signService)
@@ -82,6 +91,12 @@ namespace GladLive.Server.Common
 			return false;
 		}
 
+		/// <summary>
+		/// Tries to authenticate/elevate the <paramref name="session"/> with the <paramref name="authMessage"/>.
+		/// </summary>
+		/// <param name="session">Session attempting to authenticate.</param>
+		/// <param name="authMessage">Auth message.</param>
+		/// <returns>True if the session authenticated.</returns>
 		public bool TryAuthenticate(IElevatableSession session, AuthenticationMessage authMessage)
 		{
 			Logger.DebugFormat("Authenticated requested for Session {0}.", session.ToString());
@@ -149,6 +164,12 @@ namespace GladLive.Server.Common
 			return signingService.isSigned(expectedMessage, signedMessage);
 		}
 
+
+		/// <summary>
+		/// Tries to revoke auth status of the <paramref name="session"/>.
+		/// </summary>
+		/// <param name="session">Session to revoke for.</param>
+		/// <returns>True if the session was found and unelevated.</returns>
 		public bool TryRevokeAuthentication(IElevatableSession session)
 		{
 			lockObj.EnterWriteLock();
@@ -173,6 +194,11 @@ namespace GladLive.Server.Common
 			}
 		}
 
+		/// <summary>
+		/// Grants a tracked token for a single given <see cref="IElevatableSession"/>.
+		/// </summary>
+		/// <param name="session">Session to grant the token for.</param>
+		/// <returns>A new <see cref="Guid"/> token for the session</returns>
 		public Guid RequestSingleUseToken(IElevatableSession session)
 		{
 			lockObj.EnterWriteLock();
@@ -183,6 +209,8 @@ namespace GladLive.Server.Common
 				Logger.DebugFormat("Created new Guid {0} adding to managed sessions for Session {1}.", newToken.ToString(), session.ToString());
 
 				authTokenMap.Add(newToken, new ManagedSession(session, false));
+
+				session.UniqueAuthToken = newToken;
 
 				return newToken;
 			}
