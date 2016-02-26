@@ -77,7 +77,7 @@
     <Compile Include="Session\Auth\ElevationManager.cs" />
     <Compile Include="Session\Auth\IElevationAuthenticationService.cs" />
     <Compile Include="Session\Auth\IElevationVerificationService.cs" />
-    <Compile Include="Session\Handlers\ElevatedSessionPayloadHandler.cs" />
+    <Compile Include="Session\Handlers\ElevatedSessionPayloadHandlerDecorator.cs" />
     <Compile Include="Session\IConnectionGateKeeper.cs" />
     <Compile Include="Session\Auth\IElevatableSession.cs" />
     <Compile Include="Session\IPortToSessionTypeService.cs" />
