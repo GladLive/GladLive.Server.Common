@@ -13,7 +13,8 @@ namespace GladLive.Server.Common
 	/// Handler for <see cref="AuthenticationRequest"/>s messages for <see cref="IElevatableSession"/> peers.
 	/// </summary>
 	/// <typeparam name="TPeerType">Peer that that implements <see cref="IElevatableSession"/>.</typeparam>
-	public class AuthenticationRequestHandler<TPeerType> : IPayloadHandler<TPeerType, AuthenticationRequest>, IClassLogger
+	[PayloadHandlerType(OperationType.Request, typeof(AuthenticationRequest))]
+	public class AuthenticationRequestHandler<TPeerType> : IRequestPayloadHandler<TPeerType, AuthenticationRequest>, IClassLogger
 		where TPeerType : IElevatableSession, INetPeer
 	{
 		public ILog Logger { get; }
@@ -21,7 +22,7 @@ namespace GladLive.Server.Common
 		/// <summary>
 		/// Authentication service the handler defers requests to.
 		/// </summary>
-		private IElevationAuthenticationService elevationAuthService;
+		private IElevationAuthenticationService elevationAuthService { get; }
 
 		public AuthenticationRequestHandler(ILog logger, IElevationAuthenticationService authService)
 		{
