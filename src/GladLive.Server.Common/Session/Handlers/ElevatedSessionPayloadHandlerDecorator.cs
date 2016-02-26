@@ -28,6 +28,9 @@ namespace GladLive.Server.Common
 		/// </summary>
 		private IElevationVerificationService verificationService { get; }
 
+		/// <summary>
+		/// Internal payload handler to decorate with elevation required semantics
+		/// </summary>
 		private IPayloadHandler<TSessionType> decoratedHandler { get; }
 
 		public ElevatedSessionPayloadHandlerDecorator(ILog logger, IElevationVerificationService verifyService, IPayloadHandler<TSessionType> handlerToDecorate)
@@ -42,7 +45,7 @@ namespace GladLive.Server.Common
 			//Decorates the internal handler with auth/elevation semantics
 
 			//Very important to check elevation status
-			if(verificationService.isElevated(peer.Token, peer))
+			if(verificationService.isElevated(peer))
 			{
 				return decoratedHandler.TryProcessPayload(payload, parameters, peer);
 			}

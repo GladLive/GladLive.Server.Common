@@ -9,6 +9,7 @@ namespace GladLive.Server.Common
 	public enum PayloadNumber : int
 	{
 		AuthTokenRequest = 255,
-		AuthenticationRequest = 256
+		AuthTokenResponse = 256,
+		AuthenticationRequest = 257
 	}
 }

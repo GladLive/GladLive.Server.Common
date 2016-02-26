@@ -12,6 +12,11 @@ namespace GladLive.Server.Common
 	/// </summary>
 	public interface IElevationVerificationService
 	{
-		bool isElevated(AuthorizationToken token, IElevatableSession session);
+		/// <summary>
+		/// Checks the elevation status of the <paramref name="session"/>.
+		/// </summary>
+		/// <param name="session">Instance of the session to check</param>
+		/// <returns>True if the session is elevated.</returns>
+		bool isElevated(IElevatableSession session);
 	}
 }
