@@ -12,6 +12,6 @@ namespace GladLive.Server.Common
 	/// </summary>
 	public interface IElevationVerificationService
 	{
-		bool isElevated(AuthorizationToken token, IElevatableSession session);
+		bool isElevated(IElevatableSession session);
 	}
 }

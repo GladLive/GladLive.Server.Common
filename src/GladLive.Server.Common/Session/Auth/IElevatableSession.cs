@@ -14,11 +14,6 @@ namespace GladLive.Server.Common
 		/// <summary>
 		/// Token used for elevated priviliges.
 		/// </summary>
-		AuthorizationToken Token { get; set; }
-
-		/// <summary>
-		/// Indicates if the session has elevated.
-		/// </summary>
-		bool isElevated { get; }
+		Guid UniqueAuthToken { get; set; }
 	}
 }

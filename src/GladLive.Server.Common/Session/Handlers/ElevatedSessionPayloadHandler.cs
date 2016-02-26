@@ -45,7 +45,7 @@ namespace GladLive.Server.Common
 			//Decorates the internal handler with auth/elevation semantics
 
 			//Very important to check elevation status
-			if(verificationService.isElevated(peer.Token, peer))
+			if(verificationService.isElevated(peer))
 			{
 				return decoratedHandler.TryProcessPayload(payload, parameters, peer);
 			}

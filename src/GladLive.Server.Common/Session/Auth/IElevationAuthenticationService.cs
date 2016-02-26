@@ -13,5 +13,9 @@ namespace GladLive.Server.Common
 	public interface IElevationAuthenticationService
 	{
 		bool TryAuthenticate(IElevatableSession session, AuthenticationMessage authMessage);
+
+		bool TryRevokeAuthentication(IElevatableSession session);
+
+		Guid RequestSingleUseToken(IElevatableSession session);
 	}
 }

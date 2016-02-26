@@ -51,9 +51,6 @@ namespace GladLive.Server.Common
 			if (elevationAuthService.TryAuthenticate(peer, payload.Message))
 			{
 				Logger.DebugFormat("{0} session is now elevated. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);
-
-				if (!peer.isElevated)
-					Logger.Warn("Authservice indicated success but peer is not elevated.");
 			}
 			else
 				Logger.WarnFormat("{0} session failed elevation. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);

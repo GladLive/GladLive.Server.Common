@@ -74,7 +74,7 @@
     <Compile Include="Security\ISigningService.cs" />
     <Compile Include="Security\RSAX509SigningService.cs" />
     <Compile Include="Session\Auth\AuthenticationMessage.cs" />
-    <Compile Include="Session\Auth\AuthorizationToken.cs" />
+    <Compile Include="Session\Auth\ElevationManager.cs" />
     <Compile Include="Session\Auth\IElevationAuthenticationService.cs" />
     <Compile Include="Session\Auth\IElevationVerificationService.cs" />
     <Compile Include="Session\Handlers\ElevatedSessionPayloadHandler.cs" />
