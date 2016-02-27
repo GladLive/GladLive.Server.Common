@@ -19,7 +19,7 @@ namespace GladLive.Server.Common.Tests
 		public static void Test_Ctor_Doesnt_Throw()
 		{
 			//assert
-			Assert.DoesNotThrow(() => new ElevatedSessionPayloadHandlerDecorator<ElevatablePeer>(Mock.Of<ILog>(), Mock.Of<IElevationVerificationService>(), Mock.Of<IPayloadHandler<ElevatablePeer>>()));
+			Assert.DoesNotThrow(() => new ElevatedSessionChainPayloadHandlerStrategyDecorator<ElevatablePeer>(Mock.Of<ILog>(), Mock.Of<IElevationVerificationService>(), Mock.Of<ChainPayloadHandler<ElevatablePeer>>()));
 		}
 
 		[Test]
@@ -27,12 +27,12 @@ namespace GladLive.Server.Common.Tests
 		{
 			//arrange: Setup the services and init the handler
 			Mock<IElevationVerificationService> verification = new Mock<IElevationVerificationService>();
-			Mock<IPayloadHandler<ElevatablePeer>> handlers = new Mock<IPayloadHandler<ElevatablePeer>>();
+			Mock<ChainPayloadHandler<ElevatablePeer>> handlers = new Mock<ChainPayloadHandler<ElevatablePeer>>();
 
 			verification.Setup(x => x.isElevated(It.IsAny<IElevatableSession>()))
 				.Returns(false);
 
-			ElevatedSessionPayloadHandlerDecorator<ElevatablePeer> handler = new ElevatedSessionPayloadHandlerDecorator<ElevatablePeer>(Mock.Of<ILog>(), verification.Object, handlers.Object);
+			ElevatedSessionChainPayloadHandlerStrategyDecorator<ElevatablePeer> handler = new ElevatedSessionChainPayloadHandlerStrategyDecorator<ElevatablePeer>(Mock.Of<ILog>(), verification.Object, handlers.Object);
 
 			//act
 			bool result = handler.TryProcessPayload(Mock.Of<PacketPayload>(), Mock.Of<IMessageParameters>(), new ElevatablePeer());
@@ -48,7 +48,7 @@ namespace GladLive.Server.Common.Tests
 		{
 			//arrange: Setup the services and init the handler
 			Mock<IElevationVerificationService> verification = new Mock<IElevationVerificationService>();
-			Mock<IPayloadHandler<ElevatablePeer>> handlers = new Mock<IPayloadHandler<ElevatablePeer>>();
+			Mock<ChainPayloadHandler<ElevatablePeer>> handlers = new Mock<ChainPayloadHandler<ElevatablePeer>>();
 
 			verification.Setup(x => x.isElevated(It.IsAny<IElevatableSession>()))
 				.Returns(true);
@@ -56,7 +56,7 @@ namespace GladLive.Server.Common.Tests
 			handlers.Setup(x => x.TryProcessPayload(It.IsAny<PacketPayload>(), It.IsAny<IMessageParameters>(), It.IsAny<ElevatablePeer>()))
 				.Returns(true);
 
-			ElevatedSessionPayloadHandlerDecorator<ElevatablePeer> handler = new ElevatedSessionPayloadHandlerDecorator<ElevatablePeer>(Mock.Of<ILog>(), verification.Object, handlers.Object);
+			ElevatedSessionChainPayloadHandlerStrategyDecorator<ElevatablePeer> handler = new ElevatedSessionChainPayloadHandlerStrategyDecorator<ElevatablePeer>(Mock.Of<ILog>(), verification.Object, handlers.Object);
 
 			//act
 			bool result = handler.TryProcessPayload(Mock.Of<PacketPayload>(), Mock.Of<IMessageParameters>(), new ElevatablePeer());

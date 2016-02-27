@@ -14,7 +14,7 @@ namespace GladLive.Server.Common
 	/// It will add elevation requirement semantics to <see cref="IPayloadHandler{TSessionType}"/>
 	/// </summary>
 	/// <typeparam name="TSessionType">Elevatable session type.</typeparam>
-	public class ElevatedSessionPayloadHandlerDecorator<TSessionType> : IPayloadHandler<TSessionType>
+	public class ElevatedSessionChainPayloadHandlerStrategyDecorator<TSessionType> : IPayloadHandlerStrategy<TSessionType>
 		where TSessionType : IElevatableSession, INetPeer
 	{
 		public ILog Logger { get; }
@@ -29,25 +29,25 @@ namespace GladLive.Server.Common
 		private IElevationVerificationService verificationService { get; }
 
 		/// <summary>
-		/// Internal payload handler to decorate with elevation required semantics
+		/// Internal chain payload handler strategy to decorate with elevation required semantics.
 		/// </summary>
-		private IPayloadHandler<TSessionType> decoratedHandler { get; }
+		private IPayloadHandlerStrategy<TSessionType> decoratedStrategy { get; }
 
-		public ElevatedSessionPayloadHandlerDecorator(ILog logger, IElevationVerificationService verifyService, IPayloadHandler<TSessionType> handlerToDecorate)
+		public ElevatedSessionChainPayloadHandlerStrategyDecorator(ILog logger, IElevationVerificationService verifyService, ChainPayloadHandler<TSessionType> chainHandlerToDecorate)
 		{
 			Logger = logger;
 			verificationService = verifyService;
-			decoratedHandler = handlerToDecorate;
+			decoratedStrategy = chainHandlerToDecorate;
 		}
 
 		public bool TryProcessPayload(PacketPayload payload, IMessageParameters parameters, TSessionType peer)
 		{
-			//Decorates the internal handler with auth/elevation semantics
+			//Decorates the internal strategy with auth/elevation semantics
 
 			//Very important to check elevation status
 			if(verificationService.isElevated(peer))
 			{
-				return decoratedHandler.TryProcessPayload(payload, parameters, peer);
+				return decoratedStrategy.TryProcessPayload(payload, parameters, peer);
 			}
 			else
 			{
