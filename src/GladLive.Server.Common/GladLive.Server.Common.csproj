@@ -41,8 +41,8 @@
       <HintPath>..\..\packages\Common.Logging.Core.3.3.1\lib\net35\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladLive.Common, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladLive.Common.1.0.1\lib\net35\GladLive.Common.dll</HintPath>
+    <Reference Include="GladLive.Common, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladLive.Common.1.0.5\lib\net35\GladLive.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GladNet.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -53,10 +53,6 @@
       <HintPath>..\..\packages\GladNet.Serializer.1.0.1\lib\net35\GladNet.Serializer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladNet.Server.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladNet.Server.Common.1.0.1\lib\net45\GladNet.Server.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GladLiveServerCommonMeta.cs" />
     <Compile Include="Payload\Handlers\AuthenticationRequestHandler.cs" />
     <Compile Include="Payload\PayloadNumber.cs" />
     <Compile Include="Payload\Payloads\AuthenticationRequest.cs" />
@@ -78,6 +75,9 @@
     <Compile Include="Session\Auth\IElevationAuthenticationService.cs" />
     <Compile Include="Session\Auth\IElevationVerificationService.cs" />
     <Compile Include="Session\Handlers\ElevatedSessionPayloadHandlerDecorator.cs" />
+    <Compile Include="Session\Handlers\IElevatedEventPayloadHandler.cs" />
+    <Compile Include="Session\Handlers\IElevatedRequestPayloadHandler.cs" />
+    <Compile Include="Session\Handlers\IElevatedResponsePayloadHandler.cs" />
     <Compile Include="Session\IConnectionGateKeeper.cs" />
     <Compile Include="Session\Auth\IElevatableSession.cs" />
     <Compile Include="Session\IPortToSessionTypeService.cs" />
