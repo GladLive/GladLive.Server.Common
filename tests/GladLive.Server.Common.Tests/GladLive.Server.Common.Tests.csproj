@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Mock\ElevatablePeer.cs" />
     <Compile Include="Payload\Handlers\AuthenticationRequestHandlerTests.cs" />
+    <Compile Include="Payload\Handlers\RequestPayloadHandlerTests.cs" />
     <Compile Include="Payload\Payloads\PayloadTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\ElevatedSessionPayloadHandlerDecoratorTest.cs" />

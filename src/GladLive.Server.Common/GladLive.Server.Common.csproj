@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GladLiveServerCommonMeta.cs" />
+    <Compile Include="Payload\Handlers\AuthTokenRequestHandler.cs" />
     <Compile Include="Payload\Handlers\AuthenticationRequestHandler.cs" />
     <Compile Include="Payload\PayloadNumber.cs" />
     <Compile Include="Payload\Payloads\AuthenticationRequest.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Session\Handlers\IElevatedEventPayloadHandler.cs" />
     <Compile Include="Session\Handlers\IElevatedRequestPayloadHandler.cs" />
     <Compile Include="Session\Handlers\IElevatedResponsePayloadHandler.cs" />
+    <Compile Include="Session\Handlers\RequestPayloadHandler.cs" />
     <Compile Include="Session\IConnectionGateKeeper.cs" />
     <Compile Include="Session\Auth\IElevatableSession.cs" />
     <Compile Include="Session\IPortToSessionTypeService.cs" />
