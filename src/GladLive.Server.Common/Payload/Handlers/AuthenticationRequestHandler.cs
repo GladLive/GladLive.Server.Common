@@ -10,53 +10,33 @@ using Common.Logging;
 namespace GladLive.Server.Common
 {
 	/// <summary>
-	/// Handler for <see cref="AuthenticationRequest"/>s messages for <see cref="IElevatableSession"/> peers.
+	/// Handler for <see cref="AuthTokenRequestHandler"/>s messages for <see cref="IElevatableSession"/> peers.
 	/// </summary>
 	/// <typeparam name="TPeerType">Peer that that implements <see cref="IElevatableSession"/>.</typeparam>
-	[PayloadHandlerType(OperationType.Request, typeof(AuthenticationRequest))]
-	public class AuthenticationRequestHandler<TPeerType> : IRequestPayloadHandler<TPeerType, AuthenticationRequest>, IClassLogger
+	[PayloadHandlerType(OperationType.Request, typeof(AuthTokenRequest))]
+	public class AuthTokenRequestHandler<TPeerType> : RequestPayloadHandler<TPeerType, AuthTokenRequest>
 		where TPeerType : IElevatableSession, INetPeer
 	{
-		public ILog Logger { get; }
-
 		/// <summary>
 		/// Authentication service the handler defers requests to.
 		/// </summary>
 		private IElevationAuthenticationService elevationAuthService { get; }
 
-		public AuthenticationRequestHandler(ILog logger, IElevationAuthenticationService authService)
+		public AuthTokenRequestHandler(ILog logger, IElevationAuthenticationService authService)
+			: base(logger)
 		{
-			Logger = logger;
 			elevationAuthService = authService;
 		}
 
-		//explictly implement this
-		bool IPayloadHandler<TPeerType>.TryProcessPayload(PacketPayload payload, IMessageParameters parameters, TPeerType peer)
+		protected override void HandleNonNullStronglyTypedPayload(AuthTokenRequest payload, IMessageParameters parameters, TPeerType peer)
 		{
-			//Try cast and if it's not null then we can call the more derived version
-			AuthenticationRequest request = payload as AuthenticationRequest;
+			Logger.DebugFormat("{0} session is requesting an auth token. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);
 
-			if (request == null)
-				return false;
-			else
-			{
-				return this.TryProcessPayload(request, parameters, peer);
-			}
-		}
+			//Ask for a new token and associate it with the requesting session
+			Guid token = elevationAuthService.RequestSingleUseToken(peer);
 
-		public bool TryProcessPayload(AuthenticationRequest payload, IMessageParameters parameters, TPeerType peer)
-		{
-			Logger.DebugFormat("{0} session is requesting elevation. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);
-
-			//Check if we were sent the expected valid signed message for authentication/elevation
-			if (elevationAuthService.TryAuthenticate(peer, payload.Message))
-			{
-				Logger.DebugFormat("{0} session is now elevated. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);
-			}
-			else
-				Logger.WarnFormat("{0} session failed elevation. ID {1}", peer.GetType(), peer.PeerDetails.ConnectionID);
-
-			return true;
+			//Send the token to the session
+			peer.TrySendMessage(OperationType.Response, new AuthTokenResponse(token));
 		}
 	}
 }
