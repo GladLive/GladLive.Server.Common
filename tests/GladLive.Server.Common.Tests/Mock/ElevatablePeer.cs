@@ -1,4 +1,5 @@
 ﻿using GladNet.Common;
+using GladNet.Engine.Common;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace GladLive.Server.Common.Tests
 {
 	public class ElevatablePeer : INetPeer, IElevatableSession
 	{
-		public INetworkMessageSender NetworkSendService
+		public INetworkMessageRouterService NetworkSendService
 		{
 			get
 			{

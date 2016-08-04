@@ -1,5 +1,6 @@
 ﻿using Common.Logging;
 using GladNet.Common;
+using GladNet.Message;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -29,7 +30,7 @@ namespace GladLive.Server.Common.Tests
 			ElevatablePeer peer = new ElevatablePeer();
 
 			//act
-			bool result = handler.TryProcessPayload(Mock.Of<AuthenticationRequest>(), Mock.Of<IMessageParameters>(), peer);
+			bool result = handler.TryProcessMessage(new RequestMessage(Mock.Of<AuthenticationRequest>()), Mock.Of<IMessageParameters>(), peer);
 
 			//assert
 			Assert.IsTrue(result);

@@ -13,7 +13,7 @@ namespace GladLive.Server.Common
 		/// <summary>
 		/// The byte[] value of the signed message
 		/// </summary>
-		[GladNetMember(1)]
+		[GladNetMember(GladNetDataIndex.Index1)]
 		public byte[] SignedMessage { get; }
 
 		public AuthenticationMessage(byte[] signedMessage)

@@ -41,22 +41,43 @@
       <HintPath>..\..\packages\Common.Logging.Core.3.3.1\lib\net35\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladLive.Common, Version=1.0.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladLive.Common.1.0.11\lib\net35\GladLive.Common.dll</HintPath>
+    <Reference Include="Easyception, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Easyception.2.0.0\lib\net35\Easyception.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladNet.Common, Version=1.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladNet.Common.1.0.15\lib\net35\GladNet.Common.dll</HintPath>
+    <Reference Include="GladLive.Security.Common, Version=1.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladLive.Security.Common.1.0.12\lib\net45\GladLive.Security.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladNet.Payload, Version=1.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladNet.Payload.1.0.15\lib\net35\GladNet.Payload.dll</HintPath>
+    <Reference Include="GladNet.Common, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Common.2.0.14\lib\net35\GladNet.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GladNet.Serializer, Version=1.0.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GladNet.Serializer.1.0.15\lib\net35\GladNet.Serializer.dll</HintPath>
+    <Reference Include="GladNet.Encryption, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Encryption.2.0.14\lib\net35\GladNet.Encryption.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GladNet.Engine.Common, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Engine.Common.2.0.14\lib\net35\GladNet.Engine.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GladNet.Message, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Message.2.0.14\lib\net35\GladNet.Message.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GladNet.Message.Handlers, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Message.Handlers.2.0.14\lib\net45\GladNet.Message.Handlers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GladNet.Payload, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Payload.2.0.14\lib\net35\GladNet.Payload.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GladNet.Serializer, Version=2.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GladNet.Serializer.2.0.14\lib\net35\GladNet.Serializer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -73,16 +94,11 @@
     <Compile Include="Payload\Payloads\AuthTokenResponse.cs" />
     <Compile Include="Payload\Payloads\AuthTokenRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\ISigningService.cs" />
-    <Compile Include="Security\RSAX509SigningService.cs" />
     <Compile Include="Session\Auth\AuthenticationMessage.cs" />
     <Compile Include="Session\Auth\ElevationManager.cs" />
     <Compile Include="Session\Auth\IElevationAuthenticationService.cs" />
     <Compile Include="Session\Auth\IElevationVerificationService.cs" />
     <Compile Include="Session\Handlers\ElevatedSessionPayloadHandlerDecorator.cs" />
-    <Compile Include="Session\Handlers\IElevatedEventPayloadHandler.cs" />
-    <Compile Include="Session\Handlers\IElevatedRequestPayloadHandler.cs" />
-    <Compile Include="Session\Handlers\IElevatedResponsePayloadHandler.cs" />
     <Compile Include="Session\Handlers\RequestPayloadHandler.cs" />
     <Compile Include="Session\IConnectionGateKeeper.cs" />
     <Compile Include="Session\Auth\IElevatableSession.cs" />
