@@ -1,4 +1,5 @@
 ﻿using Common.Logging;
+using GladLive.Security.Common;
 using Moq;
 using NUnit.Framework;
 using System;

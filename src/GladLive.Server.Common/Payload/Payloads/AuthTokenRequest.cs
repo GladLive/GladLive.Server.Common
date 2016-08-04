@@ -1,4 +1,6 @@
 ﻿using GladNet.Common;
+using GladNet.Message;
+using GladNet.Payload;
 using GladNet.Serializer;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace GladLive.Server.Common
 	/// Wire ready message that requests an authentication token.
 	/// </summary>
 	[GladNetSerializationContract]
-	[GladNetSerializationInclude((int)PayloadNumber.AuthTokenRequest, typeof(PacketPayload), false)]
+	[GladNetSerializationInclude((GladNetIncludeIndex)PayloadNumber.AuthTokenRequest, typeof(PacketPayload), false)]
 	public class AuthTokenRequest : PacketPayload, IStaticPayloadParameters
 	{
 		//We don't need to send any data here

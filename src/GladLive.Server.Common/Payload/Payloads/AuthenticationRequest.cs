@@ -1,4 +1,6 @@
 ﻿using GladNet.Common;
+using GladNet.Message;
+using GladNet.Payload;
 using GladNet.Serializer;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,13 @@ namespace GladLive.Server.Common
 	/// Wire ready authentication request.
 	/// </summary>
 	[GladNetSerializationContract]
-	[GladNetSerializationInclude((int)PayloadNumber.AuthenticationRequest, typeof(PacketPayload), false)]
+	[GladNetSerializationInclude((GladNetIncludeIndex)PayloadNumber.AuthenticationRequest, typeof(PacketPayload), false)]
 	public class AuthenticationRequest : PacketPayload, IStaticPayloadParameters
 	{
 		/// <summary>
 		/// Authentication message to be used in the request.
 		/// </summary>
-		[GladNetMember(1, IsRequired = true)]
+		[GladNetMember(GladNetDataIndex.Index1, IsRequired = true)]
 		public AuthenticationMessage Message { get; }
 
 		/// <summary>

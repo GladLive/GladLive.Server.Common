@@ -1,4 +1,6 @@
 ﻿using GladNet.Common;
+using GladNet.Message;
+using GladNet.Payload;
 using GladNet.Serializer;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,13 @@ namespace GladLive.Server.Common
 	/// Wire ready message that sends an auth token that should be signed.
 	/// </summary>
 	[GladNetSerializationContract]
-	[GladNetSerializationInclude((int)PayloadNumber.AuthTokenResponse, typeof(PacketPayload), false)]
+	[GladNetSerializationInclude((GladNetIncludeIndex)PayloadNumber.AuthTokenResponse, typeof(PacketPayload), false)]
 	public class AuthTokenResponse : PacketPayload, IStaticPayloadParameters
 	{
 		/// <summary>
 		/// Authentication token that should be signed by a peer.
 		/// </summary>
-		[GladNetMember(1)]
+		[GladNetMember(GladNetDataIndex.Index1)]
 		public Guid AuthToken { get; }
 
 		public byte Channel { get { return 0; } }

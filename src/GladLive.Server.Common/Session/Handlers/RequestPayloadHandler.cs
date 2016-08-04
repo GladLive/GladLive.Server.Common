@@ -1,19 +1,22 @@
 ﻿using Common.Logging;
-using GladLive.Common;
-using GladNet.Common;
+using GladNet.Engine.Common;
+using GladNet.Message.Handlers;
+using GladNet.Payload;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GladNet.Message;
+using Easyception;
 
 namespace GladLive.Server.Common
 {
 	/// <summary>
-	/// Consolidated functionality for common <see cref="IRequestPayloadHandler{TPeerType, TPayloadType}"/>
+	/// <see cref="IRequestMessage"/> payload handler.
 	/// </summary>
-	/// <typeparam name="TPeerType">Type of peer this event was recieved on.</typeparam>
+	/// <typeparam name="TPeerType">Type of peer this request was recieved on.</typeparam>
 	/// <typeparam name="TPayloadType">Type of payload that this handler can handle.</typeparam>
-	public abstract class RequestPayloadHandler<TPeerType, TPayloadType> : IRequestPayloadHandler<TPeerType, TPayloadType>, IClassLogger
+	public abstract class RequestMessagePayloadHandler<TPeerType, TPayloadType> : IRequestMessageHandler<TPeerType>, IClassLogger
 		where TPayloadType : PacketPayload
 		where TPeerType : INetPeer
 	{
@@ -22,49 +25,34 @@ namespace GladLive.Server.Common
 		/// </summary>
 		public ILog Logger { get; private set; }
 
-		public RequestPayloadHandler(ILog logger)
+		public RequestMessagePayloadHandler(ILog logger)
 		{
+			Throw<ArgumentNullException>.If.IsNull(logger)?.Now(nameof(logger), $"Must provide non-null logging instance.");
+
 			Logger = logger;
 		}
 
 		/// <summary>
-		/// Attempts to handle the loosely-typed payload.
-		/// Will return false if <see cref="PacketPayload"/> isn't a <typeparamref name="TPayloadType"/>.
-		/// </summary>
-		/// <param name="payload">Packet payload to be handled.</param>
-		/// <param name="parameters">Message parameters (null with Photon)</param>
-		/// <param name="peer">The peer that recieved this <see cref="PacketPayload"/>.</param>
-		/// <returns>True if the payload was handled. False if it was not.</returns>
-		bool IPayloadHandler<TPeerType>.TryProcessPayload(PacketPayload payload, IMessageParameters parameters, TPeerType peer)
-		{
-			//Just try to as cast it and chek null in the other
-			return TryProcessPayload(payload as TPayloadType, parameters, peer);
-		}
-
-		/// <summary>
-		/// Attempts to handle the <typeparamref name="TPayloadType"/>.
+		/// Handles the <see cref="IRequestMessage"/> and specified <typeparamref name="TPayloadType"/>.
 		/// </summary>
 		/// <param name="payload">Packet payload to be handled.</param>
 		/// <param name="parameters">Message parameters (null with Photon)</param>
 		/// <param name="peer">The peer that recieved this <see cref="TPayloadType"/> payload.</param>
-		/// <returns>True if the payload was handled. False if it was not.</returns>
-		public bool TryProcessPayload(TPayloadType payload, IMessageParameters parameters, TPeerType peer)
+		protected abstract void OnIncomingHandlableMessage(IRequestMessage message, TPayloadType payload, IMessageParameters parameters, TPeerType peer);
+
+		public bool TryProcessMessage(IRequestMessage message, IMessageParameters parameters, TPeerType peer)
 		{
+			TPayloadType payload = message.Payload.Data as TPayloadType;
+
+			//if it's the not the payload type this handler handles then we
+			//indicate non-consumption
 			if (payload == null)
 				return false;
 			else
-				HandleNonNullStronglyTypedPayload(payload, parameters, peer);
+				OnIncomingHandlableMessage(message, payload, parameters, peer);
 
-			//at this point it SHOULD have been handled since we can handle this type
+			//If an exception wasn't thrown we'll be indicating that the payload has been consumed.
 			return true;
 		}
-
-		/// <summary>
-		/// Handlesthe <typeparamref name="TPayloadType"/>.
-		/// </summary>
-		/// <param name="payload">Packet payload to be handled.</param>
-		/// <param name="parameters">Message parameters (null with Photon)</param>
-		/// <param name="peer">The peer that recieved this <see cref="TPayloadType"/> payload.</param>
-		protected abstract void HandleNonNullStronglyTypedPayload(TPayloadType payload, IMessageParameters parameters, TPeerType peer);
 	}
 }
