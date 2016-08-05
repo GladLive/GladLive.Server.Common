@@ -99,6 +99,7 @@
     <Compile Include="Session\Auth\IElevationAuthenticationService.cs" />
     <Compile Include="Session\Auth\IElevationVerificationService.cs" />
     <Compile Include="Session\Handlers\ElevatedSessionPayloadHandlerDecorator.cs" />
+    <Compile Include="Session\Handlers\ElevatedSessionHandlingRequiredAttribute .cs" />
     <Compile Include="Session\Handlers\RequestPayloadHandler.cs" />
     <Compile Include="Session\IConnectionGateKeeper.cs" />
     <Compile Include="Session\Auth\IElevatableSession.cs" />
