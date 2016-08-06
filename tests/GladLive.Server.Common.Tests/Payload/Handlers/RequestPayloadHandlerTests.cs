@@ -11,6 +11,7 @@ using Common.Logging;
 using GladNet.Message;
 using GladNet.Engine.Common;
 using GladNet.Payload;
+using GladLive.Common;
 
 namespace GladLive.Server.Common.Tests
 {
