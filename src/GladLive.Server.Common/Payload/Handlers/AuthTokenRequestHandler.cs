@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Common.Logging;
 using GladNet.Engine.Common;
 using GladNet.Message;
+using GladLive.Common;
 
 namespace GladLive.Server.Common
 {
